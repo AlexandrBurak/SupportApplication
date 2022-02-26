@@ -1,9 +1,20 @@
-from rest_framework.permissions import BasePermission, SAFE_METHODS
+from rest_framework.permissions import SAFE_METHODS, BasePermission
+
+from tickets.models import Support
 
 
-class IsOwnerOrReadOnly(BasePermission):
-    def has_object_permission(self, request, view, obj):
-        if request.method in SAFE_METHODS:
+class IsReadOnly(BasePermission):
+    def has_permission(self, request, view):
+        if request.method in ['GET', 'POST']:
             return True
+        return False
 
+
+class IsOwner(BasePermission):
+    def has_object_permission(self, request, view, obj):
         return obj.author == request.user
+
+
+class IsSupporter(BasePermission):
+    def has_permission(self, request, view):
+        return Support.objects.filter(supporter=request.user).exists()

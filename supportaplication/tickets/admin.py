@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Ticket, Support
+from .models import Feedback, Support, Ticket
 
 
 class TicketAdmin(admin.ModelAdmin):
@@ -15,5 +15,11 @@ class SupportAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ('message', 'sender', 'departure_date')
+    empty_value_display = '-пусто-'
+
+
 admin.site.register(Support, SupportAdmin)
 admin.site.register(Ticket, TicketAdmin)
+admin.site.register(Feedback, FeedbackAdmin)

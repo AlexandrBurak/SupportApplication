@@ -14,7 +14,8 @@ class Support(models.Model):
     supporter = models.OneToOneField(User,
                                      on_delete=models.CASCADE,
                                      primary_key=True,
-                                     related_name='support')
+                                     related_name='support',
+                                     default=None)
 
     def __str__(self):
         return self.supporter.username
@@ -40,3 +41,16 @@ class Ticket(models.Model):
 
     def __str__(self):
         return self.status
+
+
+class Feedback(models.Model):
+    ticket = models.ForeignKey(Ticket,
+                               on_delete=models.CASCADE,
+                               related_name='feedbacks',
+                               default=None)
+    message = models.TextField()
+    departure_date = models.DateField(
+        'Дата отправки', auto_now_add=True)
+    sender = models.ForeignKey(User,
+                               on_delete=models.CASCADE,
+                               related_name='feedbacks')
