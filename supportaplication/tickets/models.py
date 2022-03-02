@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.core.exceptions import ValidationError
 
 User = get_user_model()
 
@@ -46,11 +47,13 @@ class Ticket(models.Model):
 class Feedback(models.Model):
     ticket = models.ForeignKey(Ticket,
                                on_delete=models.CASCADE,
-                               related_name='feedbacks',
-                               default=None)
+                               related_name='feedbacks',)
     message = models.TextField()
     departure_date = models.DateField(
         'Дата отправки', auto_now_add=True)
     sender = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='feedbacks')
+
+    def __str__(self):
+        return self.message

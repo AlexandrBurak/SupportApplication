@@ -17,4 +17,6 @@ class IsOwner(BasePermission):
 
 class IsSupporter(BasePermission):
     def has_permission(self, request, view):
-        return Support.objects.filter(supporter=request.user).exists()
+        if request.method in ['GET', 'POST', 'PATCH']:
+            return Support.objects.filter(supporter=request.user).exists()
+        return False

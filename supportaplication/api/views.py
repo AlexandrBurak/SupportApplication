@@ -30,7 +30,8 @@ class TicketViewSet(viewsets.ModelViewSet):
                                       annotate(count_ticks=
                                                Count('tickets')).
                                       order_by('count_ticks')[0])
-        serializer.save(author=self.request.user, supporter=supporter)
+        serializer.save(author=self.request.user, supporter=supporter,
+                        text=self.request.data.get('text'))
 
     def get_queryset(self):
         return self.request.user.tickets
