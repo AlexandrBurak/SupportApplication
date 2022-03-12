@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from api.permissions import IsReadOnly, IsSupporter
 from api.serializers import FeedbackSerializer, TicketSerializer
 from tickets.models import Support, Ticket
+from api.tasks import del_close_ticket
 
 
 class TicketSupportViewSet(viewsets.ModelViewSet):
@@ -17,6 +18,7 @@ class TicketSupportViewSet(viewsets.ModelViewSet):
 
     def partial_update(self, request, *args, **kwargs):
         kwargs['partial'] = True
+        del_close_ticket.delay(self.request.user.email)
         return self.update(request, *args, **kwargs)
 
 

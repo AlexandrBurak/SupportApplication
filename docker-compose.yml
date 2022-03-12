@@ -1,11 +1,23 @@
 version: '3.3'
 services:
   web:
-    build: ./
+    build: ./supportaplication
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./app/:/usr/src/supportaplication/
+      - .:/supportaplication
     ports:
       - 8000:8000
+    depends_on:
+      - db
     env_file:
       - ./supportaplication/supportaplication/.env
+  db:
+    image: postgres
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - '5432:5432'
+volumes:
+  postgres_data:
