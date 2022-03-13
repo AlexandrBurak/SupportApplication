@@ -35,5 +35,6 @@ API стремится к __RESTFUL__ и представляет собой с�
     git clone git@github.com:AlexandrBurak/SupportApplication.git
     cd supportaplication/
     docker build .
+    cd ..
     docker-compose up -d --build
 ***
