@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from api.permissions import IsReadOnly, IsSupporter
 from api.serializers import FeedbackSerializer, TicketSerializer
 from tickets.models import Support, Ticket
-from api.tasks import del_close_ticket
+from api.tasks import send_task
 
 
 class TicketSupportViewSet(viewsets.ModelViewSet):
@@ -18,7 +18,6 @@ class TicketSupportViewSet(viewsets.ModelViewSet):
 
     def partial_update(self, request, *args, **kwargs):
         kwargs['partial'] = True
-        del_close_ticket.delay(self.request.user.email)
         return self.update(request, *args, **kwargs)
 
 
@@ -47,6 +46,7 @@ class FeedbackViewSet(viewsets.ModelViewSet):
         ticket = get_object_or_404(Ticket,
                                    pk=self.kwargs.get('ticket_id'))
         serializer.save(sender=self.request.user, ticket=ticket)
+        send_task.delay(self.request.user)
 
     def get_queryset(self):
         ticket = get_object_or_404(Ticket,

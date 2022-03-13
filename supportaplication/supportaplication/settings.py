@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_yasg',
     'rest_framework',
     'djoser',
     'rest_framework.authtoken',
@@ -90,7 +91,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'supportaplication.wsgi.application'
-
 
 DATABASES = {
     'default': {
@@ -144,7 +144,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSOWORD = os.getenv('EMAIL_HOST_PASSOWORD')
 EMAIL_PORT = 587
-
 
 REDIS_HOST = '192.168.99.100'
 REDIS_PORT = '6379'

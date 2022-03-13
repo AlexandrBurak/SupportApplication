@@ -22,14 +22,21 @@ django-templated-mail==1.1.1
 djangorestframework==3.12.4
 djangorestframework-simplejwt==4.3.0
 djoser==2.1.0
+dnspython==2.2.1
+drf-yasg==1.20.0
+eventlet==0.33.0
+greenlet==1.1.2
 gunicorn==20.1.0
+h5py==2.10.0
 idna==3.3
+inflection==0.5.1
 iniconfig==1.1.1
 isort==5.10.1
 itypes==1.2.0
 Jinja2==3.0.3
 kombu==5.2.3
 MarkupSafe==2.1.0
+numpy==1.22.3
 oauthlib==3.2.0
 packaging==21.3
 Pillow==8.3.1
@@ -50,6 +57,8 @@ pytz==2021.3
 redis==4.1.4
 requests==2.26.0
 requests-oauthlib==1.3.1
+ruamel.yaml==0.17.21
+ruamel.yaml.clib==0.2.6
 six==1.16.0
 social-auth-app-django==4.0.0
 social-auth-core==4.2.0
@@ -61,4 +70,3 @@ urllib3==1.26.8
 vine==5.0.0
 wcwidth==0.2.5
 wrapt==1.13.3
-h5py==2.10.0
